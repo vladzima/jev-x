@@ -1,0 +1,20 @@
+// Cut the Noise — scoring backend.
+// Devel: `npm install`, fill .dev.vars, `npm run dev`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cut-the-noise-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "preview_urls": false,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SCORES",
+      "id": "a841aaba01954fd18632bb88a848f017"
+    }
+  ]
+}

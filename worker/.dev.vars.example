@@ -1,0 +1,7 @@
+# Cut the Noise worker secrets — NEVER commit real values.
+# Copy this file's shape into .dev.vars (gitignored) or use:
+#   npx wrangler secret put TYPESAFE_API_KEY
+#   npx wrangler secret put WORKER_TOKEN
+
+TYPESAFE_API_KEY=your-typesafe-api-key
+WORKER_TOKEN=generate-with-openssl-rand-hex-32

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Cut the Noise</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <h1>Cut the noise</h1>
+    <label class="toggle">
+      <input type="checkbox" id="enabled" />
+      <span>Enabled</span>
+    </label>
+  </header>
+
+  <section>
+    <h2>Your interests</h2>
+    <p class="hint">Used for the relevance score. One or two sentences.</p>
+    <textarea id="interests" rows="2"
+      placeholder="e.g. Software engineering, AI tooling, distributed systems. I build web apps."></textarea>
+  </section>
+
+  <section>
+    <h2>Sliders</h2>
+    <p class="hint">Each dimension: pull left to suppress, right to boost, middle to ignore. Scoring happens once; moving sliders re-filters instantly without new API calls.</p>
+    <div class="slider" data-dim="firsthand">
+      <div class="slider-head"><label for="w-firsthand">Firsthand experience</label><span class="val" id="v-firsthand"></span></div>
+      <input type="range" id="w-firsthand" min="-3" max="3" step="1" />
+      <div class="slider-scale"><span>suppress</span><span>off</span><span>boost</span></div>
+    </div>
+    <div class="slider" data-dim="promo">
+      <div class="slider-head"><label for="w-promo">Self-promotion</label><span class="val" id="v-promo"></span></div>
+      <input type="range" id="w-promo" min="-3" max="3" step="1" />
+      <div class="slider-scale"><span>suppress</span><span>off</span><span>boost</span></div>
+    </div>
+    <div class="slider" data-dim="bait">
+      <div class="slider-head"><label for="w-bait">Engagement bait</label><span class="val" id="v-bait"></span></div>
+      <input type="range" id="w-bait" min="-3" max="3" step="1" />
+      <div class="slider-scale"><span>suppress</span><span>off</span><span>boost</span></div>
+    </div>
+    <div class="slider" data-dim="depth">
+      <div class="slider-head"><label for="w-depth">Technical depth</label><span class="val" id="v-depth"></span></div>
+      <input type="range" id="w-depth" min="-3" max="3" step="1" />
+      <div class="slider-scale"><span>suppress</span><span>off</span><span>boost</span></div>
+    </div>
+    <div class="slider" data-dim="relevance">
+      <div class="slider-head"><label for="w-relevance">Relevance</label><span class="val" id="v-relevance"></span></div>
+      <input type="range" id="w-relevance" min="-3" max="3" step="1" />
+      <div class="slider-scale"><span>suppress</span><span>off</span><span>boost</span></div>
+    </div>
+    <label class="toggle">
+      <input type="checkbox" id="collapseMode" />
+      <span>Collapse bad posts (off = dim only)</span>
+    </label>
+    <label class="toggle">
+      <input type="checkbox" id="debug" />
+      <span>Debug logging (console on x.com, then call <code>__ctnDebug()</code>)</span>
+    </label>
+    <label class="toggle">
+      <input type="checkbox" id="showScores" />
+      <span>Show Jev scores under each post (disables dim/collapse)</span>
+    </label>
+  </section>
+
+  <section>
+    <h2>Always show these authors</h2>
+    <p class="hint">One handle per line, with or without @. Never scored, never filtered.</p>
+    <textarea id="allowlist" rows="2" placeholder="@handle&#10;another"></textarea>
+  </section>
+
+  <section>
+    <h2>Backend</h2>
+    <p class="hint">Your Cut-the-Noise Worker. It calls Jev and caches scores.</p>
+    <input type="text" id="backendUrl" placeholder="http://localhost:8787" spellcheck="false" />
+    <input type="password" id="backendToken" placeholder="API token" spellcheck="false" />
+    <div class="row">
+      <button id="testBtn" type="button">Test connection</button>
+      <span id="testStatus" class="status"></span>
+    </div>
+  </section>
+
+  <section class="privacy">
+    <h2>Privacy</h2>
+    <p>While filtering is enabled, the text of posts on your home timeline and lists is sent to your backend and to TypeSafe (Jev) for scoring. Images, videos, and thread context are not included. DMs, notifications, profiles and search are not read. Scores are cached so repeat posts are not re-scored.</p>
+    <p>This extension reads page content in your browser. Whether reading X pages this way is acceptable under X's current terms is your call to make — check X's developer/automation policies before relying on it, and use your own account only.</p>
+  </section>
+
+  <footer>
+    <span id="saveStatus" class="status"></span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

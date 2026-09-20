@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Cut the Noise",
+  "version": "0.1.2",
+  "description": "Adjust your timeline: more firsthand experience, fewer sales pitches and engagement bait. You define what 'good content' means.",
+  "permissions": ["storage"],
+  "host_permissions": ["http://localhost:8787/*"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "js": ["lib/composition.js", "content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html"
+  }
+}
